@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom';
 import { configureStore } from './application/store';
 import './index.css';
 import App from './views/App';
+import services from './infraestructure/services'
 
 ReactDOM.render(
-  <Provider store={configureStore}>
+  <Provider store={configureStore(services)}>
     <App />
   </Provider>,
   document.getElementById('root')
