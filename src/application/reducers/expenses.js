@@ -1,18 +1,21 @@
-import { LOAD_EXPENSES_SUCCESS, PUT_EXPENSE, SET_EXPENSES } from "../actions/expenses"
+import { FILTER_EXPENSES, LOAD_EXPENSES, LOAD_EXPENSES_SUCCESS, PUT_EXPENSE, SET_EXPENSES } from "../actions/expenses"
 
 const initialState =  {
     allExpenses: [],
+    filter: '',
     error: null
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case FILTER_EXPENSES:
+            return {...state, filter: action.payload}
         case LOAD_EXPENSES_SUCCESS:
-            return { allExpenses: action.payload, error: null}
+            return {...state, allExpenses: action.payload}
         case PUT_EXPENSE:
-            return { allExpenses: action.payload, error: null}
+            return {...state, allExpenses: action.payload}
         case SET_EXPENSES:
-            return { allExpenses: action.payload, error: null}
+            return {...state, allExpenses: action.payload}
         default:
             return state
     }

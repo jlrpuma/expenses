@@ -1,12 +1,18 @@
 export const LOAD_EXPENSES = '[expenses] load'
+export const FILTER_EXPENSES = '[expenses] filtering'
 export const LOAD_EXPENSES_SUCCESS = '[expenses] load success'
 export const LOAD_EXPENSES_FAILURE = '[expenses] load failure'
 export const SET_EXPENSES = '[expenses] set'
 export const PUT_EXPENSE = '[expenses] put'
 
 export const loadExpenses = {
-    type: LOAD_EXPENSES,
+    type: LOAD_EXPENSES
 }
+
+export const filterExpenses = filter => ({
+    type: FILTER_EXPENSES,
+    payload: filter
+}) 
 
 export const loadExpensesSuccess = todos => ({
     type: LOAD_EXPENSES_SUCCESS,

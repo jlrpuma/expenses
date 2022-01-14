@@ -1,13 +1,13 @@
-import {pageLoaded, PAGE_LOADED} from '../actions/loading';
-import * as expensesActions from '../actions/expenses';
+import * as uiActions from '../actions/loading'
 
 const pageLoadedFlow = () => ({dispatch}) => next => action => {
     next(action)
 
-    if (action.type === PAGE_LOADED) {
+    if (action.type === uiActions.PAGE_LOADED) {
         // we don't have an implementation of logs
         // log(pageLoaded)
-        dispatch(expensesActions.loadExpenses)
+        // dispatch(expensesActions.loadExpenses(''))
+        dispatch(uiActions.setLoading(true))
     }
 }
 

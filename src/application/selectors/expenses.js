@@ -1,2 +1,6 @@
-// selector to point to allExpenses attribute on the Redux state
-export const getExpenses = state => state.expenses.allExpenses
+export const selectors = {
+    getExpenses: state => state.expenses.allExpenses,
+    getFilterExpenses: state => state.expenses.filter
+}
+
+

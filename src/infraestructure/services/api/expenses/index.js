@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-    getAll: async () => {
+    getAll: async (filter) => {
         // backend is not implemented yet
         // const response = await axios.get();
         const response = {
@@ -56,6 +56,9 @@ export default {
                     category: 'Mascotas'
                 }
             ]
+        }
+        if (filter !== '') {
+            response.data = response.data.filter(expense => expense.description.includes(filter) || expense.category.includes(filter))
         }
         return response.data
     }

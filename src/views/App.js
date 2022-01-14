@@ -1,10 +1,11 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getExpenses } from '../application/selectors/expenses';
+import * as expenseSelectors from '../application/selectors/expenses';
 import { getLoading } from '../application/selectors/loading'
+
 import { pageLoaded } from '../application/actions/loading';
-import { putExpense } from '../application/actions/expenses';
+import { filterExpenses, loadExpenses } from '../application/actions/expenses';
 import { Grid, List, makeStyles, ListItem, Card, CardContent, Typography, CardHeader, TextField } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import NumberFormat from 'react-number-format';
@@ -40,21 +41,17 @@ export default () => {
 
   const classes = useStyles();
   const dispatch = useDispatch();
-  const expenses = useSelector(getExpenses)
+  const expenses = useSelector(expenseSelectors.selectors.getExpenses)
+  const expensesFilter = useSelector(expenseSelectors.selectors.getFilterExpenses)
   const loading = useSelector(getLoading);
-
-  const [search, setSearch] = useState('');
 
   useEffect(() => {
     dispatch(pageLoaded)
+    dispatch(loadExpenses)
   }, [dispatch])
 
-  useEffect(() => {
-    console.log(search)
-  }, [search]) 
-
-  const filter = (e) => {
-    setSearch(e.target.value)
+  const filterChange = (e) => {
+    dispatch(filterExpenses(e.target.value))
   }
 
   return (
@@ -73,7 +70,7 @@ export default () => {
             justifyContent="flex-start"
             alignItems="stretch"
           >
-            <TextField label="Search" variant="outlined" type="search" value={search} onChange={filter}/>
+            <TextField label="Search" variant="outlined" type="search" value={expensesFilter} onChange={filterChange}/>
             {loading ?
             (<>
               <Skeleton height={100} width={'100%'} />
